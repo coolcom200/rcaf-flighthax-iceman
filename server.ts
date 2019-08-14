@@ -37,9 +37,9 @@ async function sendGETRequest<returnType>(pageURL: string): Promise<rm.IRestResp
 APP.get('/trips', async (req, res) => {
     const allTripsRequest = await sendGETRequest<any>('taskings');
     const allTripsResponse = await allTripsRequest.result;
-    console.log(allTripsResponse)
+    // console.log(allTripsResponse)
     // TODO: Handle errors
-    const filteredData = allTripsResponse.map((data: Task) => {
+    const filteredData = allTripsResponse.map((data) => {
         console.log("data", data)
         return {
             flight_number: data.flight_number,
@@ -47,6 +47,12 @@ APP.get('/trips', async (req, res) => {
             aircraft_type: data.aircraft_type,
             squadron: data.squadron,
             id: data.id,
+            location: {
+                flight_number: data.lift_message.locations[0].flight_number,
+                load_off: data.lift_message.locations[0].load_off,
+                load_on: data.lift_message.locations[0].load_on,
+
+            }
         }
     })
 
