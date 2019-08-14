@@ -1,3 +1,5 @@
 export interface IEquipment {
-    "k-loader": boolean;
+    id: string;
+    name: string;
+    default: boolean;
 }

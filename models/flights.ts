@@ -1,6 +1,10 @@
+import { IService } from "./services";
+import { IEquipment } from "./equipment";
+
 export interface IFlight {
-    plane: string;
-    services: {
-        [key as string]: I
-    }
+    id: string;
+    planeType: string;
+    flightNum: string;
+    services: IService[];
+    equipment: IEquipment[];
 }
