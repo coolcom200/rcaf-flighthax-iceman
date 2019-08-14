@@ -2,10 +2,11 @@
   "name": "rcaf-hax",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib\\server.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-server": "npm run build && HOST='127.0.0.1' PORT=8080' node ."
+    "dev-server": "npm run build && node ."
   },
   "author": "",
   "license": "ISC",
