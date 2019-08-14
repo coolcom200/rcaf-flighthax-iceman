@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "es6",
+            "esnext.asynciterable",
+            "dom"
+        ],
+        "module": "commonjs",
+        "noImplicitReturns": false,
+        "resolveJsonModule": true,
+        "outDir": "lib",
+        "sourceMap": true,
+        "target": "es6",
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true
+    },
+    "compileOnSave": true
+}
