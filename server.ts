@@ -3,6 +3,7 @@ import * as bodyParser from "body-parser"
 import { ACCEPTED, BAD_REQUEST } from "http-status-codes"
 import * as rm from 'typed-rest-client/RestClient';
 import { TaskingsResponse, Task } from "./models/tasking";
+import * as auth from "./auth.json";
 
 
 const APP = express();
@@ -25,7 +26,7 @@ async function sendGETRequest<returnType>(pageURL: string): Promise<rm.IRestResp
     const headers: rm.IRequestOptions = {
         additionalHeaders: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '
+            'Authorization': `Bearer ${auth.token}`
         }
     };
     return await REST.get<returnType>(pageURL, headers);

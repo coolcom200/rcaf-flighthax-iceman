@@ -51,3 +51,4 @@ api/**/*.js.map
 dist/
 lib/
 /api/src/config.json
+/auth.json
