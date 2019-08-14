@@ -12,6 +12,12 @@ const PORT = process.env.PORT || 8000;
 const API_URL = process.env.API_URL || "https://flighthax.rcafinnovation.ca/";
 const REST: rm.RestClient = new rm.RestClient('', API_URL);
 
+APP.use(bodyParser.json());
+APP.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+
 
 /**
  * Sends a GET request to the RCAF API
