@@ -1,4 +1,4 @@
-interface Task {
+export interface Task {
     id: string;
     lift_number: string;
     squadron: any;

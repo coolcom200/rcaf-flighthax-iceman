@@ -2,12 +2,13 @@ import * as express from "express";
 import * as bodyParser from "body-parser"
 import { ACCEPTED, BAD_REQUEST } from "http-status-codes"
 import * as rm from 'typed-rest-client/RestClient';
+import { TaskingsResponse, Task } from "./models/tasking";
 
 
 const APP = express();
-const HOST = process.env.HOST;
-const PORT = process.env.PORT;
-const API_URL = process.env.API_URL;
+const HOST = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 8000;
+const API_URL = process.env.API_URL || "https://flighthax.rcafinnovation.ca/";
 const REST: rm.RestClient = new rm.RestClient('', API_URL);
 
 
@@ -24,6 +25,7 @@ async function sendGETRequest<returnType>(pageURL: string): Promise<rm.IRestResp
     const headers: rm.IRequestOptions = {
         additionalHeaders: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer '
         }
     };
     return await REST.get<returnType>(pageURL, headers);
@@ -32,18 +34,22 @@ async function sendGETRequest<returnType>(pageURL: string): Promise<rm.IRestResp
 
 // Get all trips data from the RCAF API
 APP.get('/trips', async (req, res) => {
-    const allTripsRequest = await sendGETRequest('taskings');
+    const allTripsRequest = await sendGETRequest<any>('taskings');
     const allTripsResponse = await allTripsRequest.result;
-    // const filteredData = {
-    //     flight_number:,
-    //     lift_number:,
-    //     aircraft_type:,
-    //     squadron: {},
-    //     id:,
-    // };
+    console.log(allTripsResponse)
     // TODO: Handle errors
+    const filteredData = allTripsResponse.map((data: Task) => {
+        console.log("data", data)
+        return {
+            flight_number: data.flight_number,
+            lift_number: data.lift_number,
+            aircraft_type: data.aircraft_type,
+            squadron: data.squadron,
+            id: data.id,
+        }
+    })
 
-    res.json(filteredData)
+    res.json(filteredData).send()
 })
 
 // Set Default services for a plane
